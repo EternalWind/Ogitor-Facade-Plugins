@@ -20,17 +20,14 @@
 
 using namespace Ogitors;
 
-class PluginExport FysicsEditor: public CBaseEditor
+class PluginExport FaInteractorEditor: public CBaseEditor
 {
-    friend class FysicsEditorFactory;
+    friend class FaInteractorEditorFactory;
 public:
-    enum CollisionShape
+    enum InteractorType
     {
-        BOX,
-        CONVEX,
-        SPHERE,
-        CYLINDER,
-        TRIMESH
+        RAYCASTING,
+        COLLISION
     };
 
     virtual void            showBoundingBox(bool bShow);
@@ -57,38 +54,40 @@ public:
 
 
     bool _setPosition(OgitorsPropertyBase* property, const Ogre::Vector3& position);
-    bool _setShape(OgitorsPropertyBase* property, const int& shape);
-    bool _setMass(OgitorsPropertyBase* property, const Ogre::Real& mass);
-    bool _setProperty(OgitorsPropertyBase* property, const Ogre::Vector3& vec3);
+    bool _setInteractionObjectHandle(OgitorsPropertyBase* property, const Ogre::String& handle);
+    bool _setRange(OgitorsPropertyBase* property, const Ogre::Real& range);
+    bool _setOffset(OgitorsPropertyBase* property, const Ogre::Real& offset);
+    bool _setInterval(OgitorsPropertyBase* property, const Ogre::Real& interval);
+    bool _setType(OgitorsPropertyBase* property, const int& type);
 
 protected:
-    FysicsEditor(CBaseEditorFactory *factory);
-    virtual ~FysicsEditor();
+    FaInteractorEditor(CBaseEditorFactory *factory);
+    virtual ~FaInteractorEditor();
 
     Ogre::SceneNode *mHandle;
     Ogre::Entity *mEntity;
     OgitorsProperty<Ogre::Vector3>     *mPosition;
-    OgitorsProperty<int>      *mShape;
-    OgitorsProperty<Ogre::Real>        *mMass;
-    OgitorsProperty<Ogre::Vector3>     *mGravity;
-    OgitorsProperty<Ogre::Vector3>     *mMoveRestrict;
-    OgitorsProperty<Ogre::Vector3>     *mRotateRestrict;
+    OgitorsProperty<int>               *mType;
+    OgitorsProperty<Ogre::String>      *mInteractionObjectHandle;
+    OgitorsProperty<Ogre::Real>        *mRange;
+    OgitorsProperty<Ogre::Real>        *mOffset;
+    OgitorsProperty<Ogre::Real>        *mInterval;
 };
 
 
-class PluginExport FysicsEditorFactory: public CBaseEditorFactory
+class PluginExport FaInteractorEditorFactory: public CBaseEditorFactory
 {
 public:
-    FysicsEditorFactory(OgitorsView *view = 0);
-    virtual ~FysicsEditorFactory() {};
+    FaInteractorEditorFactory(OgitorsView *view = 0);
+    virtual ~FaInteractorEditorFactory() {};
     virtual CBaseEditorFactory* duplicate(OgitorsView *view);
     virtual CBaseEditor *CreateObject(CBaseEditor **parent, OgitorsPropertyValueMap &params);
     virtual Ogre::String GetPlaceHolderName();
 
-    static PropertyOptionsVector* GetCollisionShapes();
+    static PropertyOptionsVector* GetInteractorTypes();
 
 protected:
-    static PropertyOptionsVector mCollisionShapes;
+    static PropertyOptionsVector mInteractorTypes;
 };
 
 

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="185" height="185" xmlns="http://www.w3.org/2000/svg">
+ <!-- Created with SVG-edit - http://svg-edit.googlecode.com/ -->
+ <g>
+  <title>Layer 1</title>
+  <rect fill="#000000" stroke-width="150" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null" y="70" width="44" height="45" id="svg_3"/>
+  <path fill="#000000" stroke-width="150" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null" d="m80.5,50l-22.5,0l-13,20l0,45l10,19l25.000023,0l0.499977,-84z" id="svg_4"/>
+  <rect fill="#000000" stroke-width="150" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null" x="141.5" y="80.5" width="44" height="24" id="svg_5"/>
+  <path fill="#000000" stroke-width="150" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null" d="m119.5,61l14.5,5l6,15l0,23l-6,13l-14,8l-0.5,-64z" id="svg_6"/>
+  <rect fill="#000000" stroke-width="150" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null" x="94.5" y="78" width="23" height="9" id="svg_7"/>
+  <rect fill="#000000" stroke-width="150" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null" x="94.5" y="99" width="23" height="9" id="svg_8"/>
+ </g>
+</svg>
