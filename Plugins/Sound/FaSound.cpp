@@ -11,8 +11,10 @@ TiXmlElement* FaSoundEditor::exportDotScene(TiXmlElement *pParent)
     TiXmlElement *pSound = pParent->InsertEndChild(TiXmlElement("sound"))->ToElement();
     pSound->SetAttribute("name", mName->get().c_str());
     pSound->SetAttribute("id", Ogre::StringConverter::toString(mObjectID->get()).c_str());
+    pSound->SetAttribute("enabled", Ogre::StringConverter::toString(mIsEnabled->get()).c_str());
     pSound->SetAttribute("soundFile", mSoundFile->get().c_str());
     pSound->SetAttribute("volume", Ogre::StringConverter::toString(mVol->get()).c_str());
+    pSound->SetAttribute("loop", Ogre::StringConverter::toString(mIsLoop->get()).c_str());
     // sound position
     TiXmlElement *pSoundPosition = pSound->InsertEndChild(TiXmlElement("position"))->ToElement();
     pSoundPosition->SetAttribute("x", Ogre::StringConverter::toString(mPosition->get().x).c_str());
@@ -89,9 +91,11 @@ void FaSoundEditor::showBoundingBox(bool bShow)
 
 void FaSoundEditor::createProperties(OgitorsPropertyValueMap &params)
 {
+    PROPERTY_PTR(mIsEnabled, "enabled", bool, true, 0, SETTER(bool, FaSoundEditor, _setEnabled));
     PROPERTY_PTR(mPosition , "position" , Ogre::Vector3, Ogre::Vector3::ZERO, 0, SETTER(Ogre::Vector3, FaSoundEditor, _setPosition));
     PROPERTY_PTR(mSoundFile, "SoundFile", Ogre::String , ""                 , 0, SETTER(Ogre::String, FaSoundEditor, _setSoundFile));
     PROPERTY_PTR(mVol      , "Volume"   , Ogre::Real   , 80.0f              , 0, SETTER(Ogre::Real, FaSoundEditor, _setVolume));
+    PROPERTY_PTR(mIsLoop, "loop", bool, false, 0, SETTER(bool, FaSoundEditor, _setLoop));
     mProperties.initValueMap(params);
 }
 
@@ -116,6 +120,16 @@ bool FaSoundEditor::_setVolume(OgitorsPropertyBase* property, const Ogre::Real& 
 {
     if( (0 > vol)||(100 < vol) )
         return false;
+    return true;
+}
+
+bool FaSoundEditor::_setEnabled(OgitorsPropertyBase* property, const bool& is_enabled)
+{
+    return true;
+}
+
+bool FaSoundEditor::_setLoop(OgitorsPropertyBase* property, const bool& is_loop)
+{
     return true;
 }
 
@@ -180,6 +194,8 @@ FaSoundEditor::FaSoundEditor(CBaseEditorFactory *factory)
     mPosition = 0;
     mUsesGizmos = true;
     mVol = 0;
+    mIsEnabled = 0;
+    mIsLoop = 0;
 }
 
 FaSoundEditor::~FaSoundEditor()
@@ -197,9 +213,11 @@ FaSoundEditorFactory::FaSoundEditorFactory(OgitorsView *view) : CBaseEditorFacto
     mIcon = "Icons/FaSound.svg";//----------------
     mCapabilities = CAN_MOVE|CAN_DELETE|CAN_CLONE|CAN_FOCUS|CAN_DRAG|CAN_ACCEPTCOPY;
 
+    AddPropertyDefinition("enabled", "Enabled", "If this component is enabled.", PROP_BOOL);
     AddPropertyDefinition("SoundFile","Sound File","",PROP_STRING);
     AddPropertyDefinition("position","Position","The position of the object.",PROP_VECTOR3);
     AddPropertyDefinition("Volume", "Volume", "The sound object's volume.0-100.",PROP_REAL);
+    AddPropertyDefinition("loop", "Loop", "If the sound is loop.", PROP_BOOL);
 }
 
 CBaseEditorFactory *FaSoundEditorFactory::duplicate(OgitorsView *view)

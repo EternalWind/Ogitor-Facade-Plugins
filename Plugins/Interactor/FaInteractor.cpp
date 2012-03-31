@@ -22,7 +22,8 @@ TiXmlElement* FaInteractorEditor::exportDotScene(TiXmlElement *pParent)
     TiXmlElement *pInteractor = pParent->InsertEndChild(TiXmlElement("interactor"))->ToElement();
     pInteractor->SetAttribute("name", mName->get().c_str());
     pInteractor->SetAttribute("id", Ogre::StringConverter::toString(mObjectID->get()).c_str());
-    pInteractor->SetAttribute("interaction_object_handle", mInteractionObjectHandle->get().c_str());
+    pInteractor->SetAttribute("enabled", Ogre::StringConverter::toString(mIsEnabled->get()).c_str());
+    pInteractor->SetAttribute("interactionObjectHandle", mInteractionObjectHandle->get().c_str());
     pInteractor->SetAttribute("range", Ogre::StringConverter::toString(mRange->get()).c_str());
     pInteractor->SetAttribute("offset", Ogre::StringConverter::toString(mOffset->get()).c_str());
     pInteractor->SetAttribute("interval", Ogre::StringConverter::toString(mInterval->get()).c_str());
@@ -104,6 +105,7 @@ void FaInteractorEditor::showBoundingBox(bool bShow)
 
 void FaInteractorEditor::createProperties(OgitorsPropertyValueMap &params)
 {
+    PROPERTY_PTR(mIsEnabled, "enabled", bool, true, 0, SETTER(bool, FaInteractorEditor, _setEnabled));
     PROPERTY_PTR(mPosition, "position",Ogre::Vector3,Ogre::Vector3::ZERO,0,SETTER(Ogre::Vector3, FaInteractorEditor, _setPosition));
     PROPERTY_PTR(mInteractionObjectHandle, "interactionObjectHandle", Ogre::String, "", 0, SETTER(Ogre::String, FaInteractorEditor, _setInteractionObjectHandle));
     PROPERTY_PTR(mRange, "range", Ogre::Real, 1.f, 0, SETTER(Ogre::Real, FaInteractorEditor, _setRange));
@@ -136,6 +138,11 @@ bool FaInteractorEditor::_setRange(OgitorsPropertyBase* property, const Ogre::Re
         return true;
     else
         return false;
+}
+
+bool FaInteractorEditor::_setEnabled(OgitorsPropertyBase* property, const bool& is_enabled)
+{
+    return true;
 }
 
 bool FaInteractorEditor::_setInterval(OgitorsPropertyBase* property, const Ogre::Real& interval)
@@ -230,6 +237,7 @@ FaInteractorEditor::FaInteractorEditor(CBaseEditorFactory *factory)
     mRange = 0;
     mOffset = 0;
     mInterval = 0;
+    mIsEnabled = 0;
     mType = (int)RAYCASTING;
     mUsesGizmos = true;
 }
@@ -254,6 +262,7 @@ FaInteractorEditorFactory::FaInteractorEditorFactory(OgitorsView *view) : CBaseE
     mInteractorTypes.push_back(PropertyOption("RAYCASTING", Ogre::Any((int)FaInteractorEditor::RAYCASTING)));
     mInteractorTypes.push_back(PropertyOption("COLLISION", Ogre::Any((int)FaInteractorEditor::COLLISION)));
 
+    AddPropertyDefinition("enabled", "Enabled", "If this component is enabled.", PROP_BOOL);
     AddPropertyDefinition("position","Position","The position of the object.", PROP_VECTOR3);
     AddPropertyDefinition("interactionObjectHandle", "Handle", "The handle of the interaction object.", PROP_STRING);
     AddPropertyDefinition("range","Range","The range of the interactor.", PROP_REAL);

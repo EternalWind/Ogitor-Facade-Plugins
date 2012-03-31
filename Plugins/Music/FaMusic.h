@@ -20,19 +20,10 @@
 
 using namespace Ogitors;
 
-class PluginExport FysicsEditor: public CBaseEditor
+class PluginExport FaMusicEditor: public CBaseEditor
 {
-    friend class FysicsEditorFactory;
+    friend class FaMusicEditorFactory;
 public:
-    enum CollisionShape
-    {
-        BOX,
-        CONVEX,
-        SPHERE,
-        CYLINDER,
-        TRIMESH
-    };
-
     virtual void            showBoundingBox(bool bShow);
 
     /** @copydoc CBaseEditor::load(bool) */
@@ -57,42 +48,33 @@ public:
 
 
     bool _setPosition(OgitorsPropertyBase* property, const Ogre::Vector3& position);
-    bool _setShape(OgitorsPropertyBase* property, const int& shape);
-    bool _setMass(OgitorsPropertyBase* property, const Ogre::Real& mass);
-    bool _setProperty(OgitorsPropertyBase* property, const Ogre::Vector3& vec3);
-    bool _setMeshComponentName(OgitorsPropertyBase* property, const Ogre::String& mesh_component_name);
+    bool _setMusicHandle(OgitorsPropertyBase* property, const Ogre::String& music_handle);
+    bool _setVolume(OgitorsPropertyBase* property, const Ogre::Real& vol);
     bool _setEnabled(OgitorsPropertyBase* property, const bool& is_enabled);
+    bool _setLoop(OgitorsPropertyBase* property, const bool& is_loop);
 
 protected:
-    FysicsEditor(CBaseEditorFactory *factory);
-    virtual ~FysicsEditor();
+    FaMusicEditor(CBaseEditorFactory *factory);
+    virtual ~FaMusicEditor();
 
     Ogre::SceneNode *mHandle;
     Ogre::Entity *mEntity;
     OgitorsProperty<Ogre::Vector3>     *mPosition;
-    OgitorsProperty<int>               *mShape;
-    OgitorsProperty<Ogre::Real>        *mMass;
-    OgitorsProperty<Ogre::Vector3>     *mGravity;
-    OgitorsProperty<Ogre::Vector3>     *mMoveRestrict;
-    OgitorsProperty<Ogre::Vector3>     *mRotateRestrict;
-    OgitorsProperty<Ogre::String>      *mMeshComponentName;
+    OgitorsProperty<Ogre::String>      *mMusicHandle;
+    OgitorsProperty<Ogre::Real>        *mVol;
     OgitorsProperty<bool>              *mIsEnabled;
+    OgitorsProperty<bool>              *mIsLoop;
 };
 
 
-class PluginExport FysicsEditorFactory: public CBaseEditorFactory
+class PluginExport FaMusicEditorFactory: public CBaseEditorFactory
 {
 public:
-    FysicsEditorFactory(OgitorsView *view = 0);
-    virtual ~FysicsEditorFactory() {};
+    FaMusicEditorFactory(OgitorsView *view = 0);
+    virtual ~FaMusicEditorFactory() {};
     virtual CBaseEditorFactory* duplicate(OgitorsView *view);
     virtual CBaseEditor *CreateObject(CBaseEditor **parent, OgitorsPropertyValueMap &params);
     virtual Ogre::String GetPlaceHolderName();
-
-    static PropertyOptionsVector* GetCollisionShapes();
-
-protected:
-    static PropertyOptionsVector mCollisionShapes;
 };
 
 
