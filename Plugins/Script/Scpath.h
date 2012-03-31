@@ -20,20 +20,12 @@
 
 using namespace Ogitors;
 
-class PluginExport FysicsEditor: public CBaseEditor
+class PluginExport ScpathEditor: public CBaseEditor
 {
-    friend class FysicsEditorFactory;
+    friend class ScpathEditorFactory;
 public:
-    enum CollisionShape
-    {
-        BOX,
-        CONVEX,
-        SPHERE,
-        CYLINDER,
-        TRIMESH
-    };
 
-    virtual void            showBoundingBox(bool bShow);
+	virtual void            showBoundingBox(bool bShow);
 
     /** @copydoc CBaseEditor::load(bool) */
     virtual bool            load(bool async = true);
@@ -45,60 +37,45 @@ public:
     virtual void            onSave(bool forced = false){};
     /// Gets the Handle to encapsulated object
     inline virtual void    *getHandle() {return static_cast<void*>(mHandle);};
-    
-    virtual TiXmlElement*    exportDotScene(TiXmlElement *pParent);
-    virtual void setParentImpl(CBaseEditor *oldparent, CBaseEditor *newparent);
-    virtual void setSelectedImpl(bool bSelected);
+
+	virtual TiXmlElement*    exportDotScene(TiXmlElement *pParent);
+	virtual void setParentImpl(CBaseEditor *oldparent, CBaseEditor *newparent);
+	virtual void setSelectedImpl(bool bSelected);
     virtual bool setHighlightedImpl(bool bSelected);
     virtual void setDerivedPosition(Ogre::Vector3 val);
     virtual Ogre::Vector3 getDerivedPosition();
     virtual Ogre::AxisAlignedBox getAABB();
     virtual Ogre::SceneNode     *getNode(){if(mHandle) return mHandle; else return 0;};
 
-
-    bool _setPosition(OgitorsPropertyBase* property, const Ogre::Vector3& position);
-    bool _setShape(OgitorsPropertyBase* property, const int& shape);
-    bool _setMass(OgitorsPropertyBase* property, const Ogre::Real& mass);
-    bool _setProperty(OgitorsPropertyBase* property, const Ogre::Vector3& vec3);
-    bool _setMeshComponentName(OgitorsPropertyBase* property, const Ogre::String& mesh_component_name);
+	bool _setPosition(OgitorsPropertyBase* property, const Ogre::Vector3& position);
+	bool _setPath(OgitorsPropertyBase* property, const Ogre::String& path);
     bool _setEnabled(OgitorsPropertyBase* property, const bool& is_enabled);
+    bool _setUpdateCallEnabled(OgitorsPropertyBase* property, const bool& is_update_call_enabled);
 
 protected:
-    FysicsEditor(CBaseEditorFactory *factory);
-    virtual ~FysicsEditor();
+	ScpathEditor(CBaseEditorFactory *factory);
+    virtual ~ScpathEditor();
 
     Ogre::SceneNode *mHandle;
     Ogre::Entity *mEntity;
     OgitorsProperty<Ogre::Vector3>     *mPosition;
-    OgitorsProperty<int>               *mShape;
-    OgitorsProperty<Ogre::Real>        *mMass;
-    OgitorsProperty<Ogre::Vector3>     *mGravity;
-    OgitorsProperty<Ogre::Vector3>     *mMoveRestrict;
-    OgitorsProperty<Ogre::Vector3>     *mRotateRestrict;
-    OgitorsProperty<Ogre::String>      *mMeshComponentName;
+	OgitorsProperty<Ogre::String>      *mPath;
     OgitorsProperty<bool>              *mIsEnabled;
+    OgitorsProperty<bool>              *mIsUpdateCallEnabled;
 };
 
 
-class PluginExport FysicsEditorFactory: public CBaseEditorFactory
-{
+class PluginExport ScpathEditorFactory: public CBaseEditorFactory {
 public:
-    FysicsEditorFactory(OgitorsView *view = 0);
-    virtual ~FysicsEditorFactory() {};
+    ScpathEditorFactory(OgitorsView *view = 0);
+    virtual ~ScpathEditorFactory() {};
     virtual CBaseEditorFactory* duplicate(OgitorsView *view);
     virtual CBaseEditor *CreateObject(CBaseEditor **parent, OgitorsPropertyValueMap &params);
     virtual Ogre::String GetPlaceHolderName();
-
-    static PropertyOptionsVector* GetCollisionShapes();
-
-protected:
-    static PropertyOptionsVector mCollisionShapes;
 };
 
 
 
 extern "C" bool PluginExport dllStartPlugin(void *identifier, Ogre::String& name);
-
-extern "C" bool PluginExport dllGetPluginName(Ogre::String& name);
 
 extern "C" bool PluginExport dllStopPlugin(void);

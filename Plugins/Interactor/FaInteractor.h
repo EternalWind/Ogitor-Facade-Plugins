@@ -59,6 +59,7 @@ public:
     bool _setOffset(OgitorsPropertyBase* property, const Ogre::Real& offset);
     bool _setInterval(OgitorsPropertyBase* property, const Ogre::Real& interval);
     bool _setType(OgitorsPropertyBase* property, const int& type);
+    bool _setEnabled(OgitorsPropertyBase* property, const bool& is_enabled);
 
 protected:
     FaInteractorEditor(CBaseEditorFactory *factory);
@@ -72,6 +73,7 @@ protected:
     OgitorsProperty<Ogre::Real>        *mRange;
     OgitorsProperty<Ogre::Real>        *mOffset;
     OgitorsProperty<Ogre::Real>        *mInterval;
+    OgitorsProperty<bool>              *mIsEnabled;
 };
 
 
