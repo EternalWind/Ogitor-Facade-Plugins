@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<svg width="640" height="480" xmlns="http://www.w3.org/2000/svg">
+ <!-- Created with SVG-edit - http://svg-edit.googlecode.com/ -->
+ <g>
+  <title>Layer 1</title>
+  <line id="svg_2" y2="377" x2="137" y1="264" x1="249" stroke-width="5" stroke="#000000" fill="none"/>
+  <line id="svg_3" y2="264" x2="423.024459" y1="264" x1="247" stroke-width="5" stroke="#000000" fill="none"/>
+  <line id="svg_4" y2="379" x2="309" y1="266" x1="421" stroke-width="5" stroke="#000000" fill="none"/>
+  <line id="svg_5" y2="378" x2="312.024459" y1="378" x1="136" stroke-width="5" stroke="#000000" fill="none"/>
+  <line id="svg_6" y2="426" x2="312.024459" y1="426" x1="136" stroke-width="5" stroke="#000000" fill="none"/>
+  <line id="svg_7" y2="428.159745" x2="138" y1="378" x1="138" stroke-linecap="null" stroke-linejoin="null" stroke-dasharray="null" stroke-width="5" stroke="#000000" fill="none"/>
+  <line id="svg_8" y2="427.159745" x2="309" y1="377" x1="309" stroke-linecap="null" stroke-linejoin="null" stroke-dasharray="null" stroke-width="5" stroke="#000000" fill="none"/>
+  <line id="svg_9" y2="426" x2="311" y1="313" x1="423" stroke-width="5" stroke="#000000" fill="none"/>
+  <line id="svg_10" y2="315.159745" x2="421" y1="265" x1="421" stroke-linecap="null" stroke-linejoin="null" stroke-dasharray="null" stroke-width="5" stroke="#000000" fill="none"/>
+  <ellipse ry="18" rx="25" id="svg_11" cy="319" cx="279" stroke-linecap="null" stroke-linejoin="null" stroke-dasharray="null" stroke-width="5" stroke="#000000" fill="#cccccc"/>
+  <rect transform="rotate(16.086084365844727 301.00000000000057,244.50000000000006) " id="svg_12" height="151" width="48.000001" y="169" x="276.999998" stroke-linecap="null" stroke-linejoin="null" stroke-dasharray="null" stroke-width="5" stroke="#000000" fill="#cccccc"/>
+  <ellipse ry="41" rx="41" id="svg_13" cy="168" cx="323" stroke-linecap="null" stroke-linejoin="null" stroke-dasharray="null" stroke-width="5" stroke="#000000" fill="#ff0000"/>
+  <ellipse ry="18.5" rx="18" id="svg_14" cy="312.5" cx="285" stroke-linecap="null" stroke-linejoin="null" stroke-dasharray="null" stroke-width="5" fill="#cccccc"/>
+  <ellipse transform="rotate(29.913646697998047 277,312.5) " id="svg_15" ry="18.5" rx="18" cy="312.5" cx="277" stroke-linecap="null" stroke-linejoin="null" stroke-dasharray="null" stroke-width="5" fill="#cccccc"/>
+ </g>
+</svg>
