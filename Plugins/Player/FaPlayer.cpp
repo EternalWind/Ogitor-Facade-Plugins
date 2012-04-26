@@ -8,7 +8,7 @@ using namespace std;
 TiXmlElement* PlayerEditor::exportDotScene(TiXmlElement *pParent)
 {
     // player object 
-    TiXmlElement *pPlayer = pParent->InsertEndChild(TiXmlElement("physics"))->ToElement();
+    TiXmlElement *pPlayer = pParent->InsertEndChild(TiXmlElement("player"))->ToElement();
     pPlayer->SetAttribute("name", mName->get().c_str());
     pPlayer->SetAttribute("id", Ogre::StringConverter::toString(mObjectID->get()).c_str());
     pPlayer->SetAttribute("enabled", Ogre::StringConverter::toString(mIsEnabled->get()).c_str());

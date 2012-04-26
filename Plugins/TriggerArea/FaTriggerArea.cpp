@@ -19,7 +19,7 @@ TiXmlElement* TriggerAreaEditor::exportDotScene(TiXmlElement *pParent)
     }
 
     // player object 
-    TiXmlElement *pPlayer = pParent->InsertEndChild(TiXmlElement("physics"))->ToElement();
+    TiXmlElement *pPlayer = pParent->InsertEndChild(TiXmlElement("trigger_area"))->ToElement();
     pPlayer->SetAttribute("name", mName->get().c_str());
     pPlayer->SetAttribute("id", Ogre::StringConverter::toString(mObjectID->get()).c_str());
     pPlayer->SetAttribute("shape", shape.c_str());
